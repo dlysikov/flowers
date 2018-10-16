@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>Flowers</artifactId>
+    <groupId>lu.luxtrust.portal</groupId>
+    <version>1.3-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>flowers-ui</artifactId>
+  <packaging>pom</packaging>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <failOnError>false</failOnError>
+          <filesets>
+            <fileset>
+              <directory>${basedir}/dist</directory>
+              <followSymlinks>false</followSymlinks>
+            </fileset>
+          </filesets>
+        </configuration>
+      </plugin>
+      <!-- OWASP dependency checks -->
+      <!--<plugin>-->
+        <!--<groupId>org.owasp</groupId>-->
+        <!--<artifactId>dependency-check-maven</artifactId>-->
+        <!--<version>3.1.1</version>-->
+        <!--<configuration>-->
+          <!--&lt;!&ndash; Severity level (cf. https://nvd.nist.gov/vuln-metrics/cvss)-->
+                        <!--None        0.0-->
+                        <!--Low         0.1-3.9-->
+                        <!--Medium      4.0-6.9-->
+                        <!--High        7.0-8.9-->
+                        <!--Critical    9.0-10.0-->
+                     <!--&ndash;&gt;-->
+          <!--<failBuildOnCVSS>${owasp.cvss.score}</failBuildOnCVSS> &lt;!&ndash; Fail build from medium-level threats &ndash;&gt;-->
+          <!--<skipProvidedScope>true</skipProvidedScope> &lt;!&ndash; Provided dependencies will not be deployed &ndash;&gt;-->
+          <!--<skipRuntimeScope>true</skipRuntimeScope> &lt;!&ndash; Runtime dependencies will not be deployed &ndash;&gt;-->
+          <!--<suppressionFiles>-->
+            <!--&lt;!&ndash; Local suppression file for each specific project &ndash;&gt;-->
+            <!--<suppressionFile>${basedir}/owasp-suppressions.xml</suppressionFile>-->
+          <!--</suppressionFiles>-->
+        <!--</configuration>-->
+        <!--<executions>-->
+          <!--<execution>-->
+            <!--<goals>-->
+              <!--<goal>check</goal>-->
+            <!--</goals>-->
+          <!--</execution>-->
+        <!--</executions>-->
+      <!--</plugin>-->
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>buildWar</id>
+      <activation>
+        <property>
+          <name>build.war</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
+            <executions>
+              <execution>
+                <id>npm install angular-cli</id>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>prepare-package</phase>
+                <configuration>
+                  <executable>npm</executable>
+                  <arguments>
+                    <argument>install</argument>
+                    <argument>--save-dev</argument>
+                    <argument>@angular/cli</argument>
+                  </arguments>
+                  <workingDirectory>${basedir}</workingDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>npm install</id>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>prepare-package</phase>
+                <configuration>
+                  <executable>npm</executable>
+                  <arguments>
+                    <argument>install</argument>
+                  </arguments>
+                  <workingDirectory>${basedir}</workingDirectory>
+                </configuration>
+              </execution>
+              <execution>
+                <id>angular-cli build</id>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>prepare-package</phase>
+                <configuration>
+                  <executable>npm</executable>
+                  <arguments>
+                    <argument>run-script</argument>
+                    <argument>build-${ui.build}</argument>
+                  </arguments>
+                  <workingDirectory>${basedir}</workingDirectory>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+</project>

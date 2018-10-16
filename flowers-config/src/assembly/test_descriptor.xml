@@ -1,0 +1,23 @@
+<assembly>
+    <id>TEST</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+
+    <fileSets>
+        <fileSet>
+            <directory>src/conf/common</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <outputDirectory>flowers</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/conf/test</directory>
+            <includes>
+                <include>**/*</include>
+            </includes>
+            <outputDirectory>flowers</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

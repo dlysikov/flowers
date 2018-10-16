@@ -1,0 +1,21 @@
+<mz-modal  [options]="modalOptions" [fixedFooter]="true">
+  <mz-modal-content>
+    <div style="position: absolute ">
+      <div >
+        <iframe [src]="pageLocation"
+                width="1170" height="650"
+                style="transform-origin: 0 0; transform: scale(1.55); overflow: hidden"
+                frameborder="0">
+
+        </iframe>
+      </div>
+    </div>
+  </mz-modal-content>
+
+  <mz-modal-footer>
+    <button mz-button mz-modal-close class="left btn-red" (click)="noCallback()">{{'app.btn.decline' | translate}}</button>
+    <button mz-button mz-modal-close class="btn-green" (click)="okCallback()">{{'app.btn.accept' | translate}}</button>
+  </mz-modal-footer>
+</mz-modal>
+
+

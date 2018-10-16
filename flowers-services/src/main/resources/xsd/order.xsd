@@ -1,0 +1,165 @@
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="FirstName">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="60"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SurName">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="60"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Email">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})"/>
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="ActivationCode">
+        <xs:restriction base="xs:string">
+            <xs:length value="5"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PhoneNumber">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="5"/>
+            <xs:maxLength value="20"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CertificateType">
+        <xs:restriction base="xs:string">
+            <!--<xs:enumeration value="PROFESSIONAL_PERSON"/>-->
+            <!--<xs:enumeration value="PROFESSIONAL_CERTIFICATE_ADMINISTRATOR"/>-->
+            <xs:enumeration value="PRIVATE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CertificateLevel">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="LCP"/>
+            <xs:enumeration value="NCP"/>
+            <!--<xs:enumeration value="QCP"/>-->
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Device">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="TOKEN"/>
+            <xs:enumeration value="MOBILE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Nationality">
+        <xs:restriction base="xs:string">
+            <xs:length value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Country">
+        <xs:restriction base="xs:string">
+            <xs:length value="2"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="IdentifierType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="VAT"/>
+            <xs:enumeration value="RCSL"/>
+            <xs:enumeration value="OTHER"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="IdentifierValue">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="Department">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="NameOfAddressee">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AddressCompany">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StreetAndHouseNo">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PostCode">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="City">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AddressLine2">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="35"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TokenSerialNumber">
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="13"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="orders">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="order" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="holder" maxOccurs="1" minOccurs="1">
+                                <xs:complexType>
+                                    <xs:attribute type="FirstName" name="firstName" use="required"/>
+                                    <xs:attribute type="SurName" name="surName" use="required"/>
+                                    <xs:attribute type="Nationality" name="nationality"/>
+                                    <xs:attribute type="Email" name="eMail"/>
+                                    <xs:attribute type="Email" name="eMailSecond"/>
+                                    <xs:attribute type="CertificateType" name="certificateType"/>
+                                    <xs:attribute type="xs:date" name="birthDate"/>
+                                    <xs:attribute type="ActivationCode" name="activationCode"/>
+                                    <xs:attribute type="PhoneNumber" name="phoneNumber"/>
+                                    <xs:attribute type="Email" name="notifyEmail" use="required"/>
+                                    <xs:attribute type="CertificateLevel" name="certificateLevel"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="address" maxOccurs="1" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:attribute type="NameOfAddressee" name="nameOfAddressee"/>
+                                    <xs:attribute type="AddressCompany" name="company"/>
+                                    <xs:attribute type="StreetAndHouseNo" name="streetAndHouseNo"/>
+                                    <xs:attribute type="PostCode" name="postCode"/>
+                                    <xs:attribute type="City" name="city"/>
+                                    <xs:attribute type="Country" name="country"/>
+                                    <xs:attribute type="AddressLine2" name="addressLine2"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="unit" maxOccurs="1" minOccurs="1">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="identifier" minOccurs="1" maxOccurs="1">
+                                            <xs:complexType>
+                                                <xs:attribute type="IdentifierType" name="type" use="required"/>
+                                                <xs:attribute type="IdentifierValue" name="value" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="TokenSerialNumber" name="tokenSerialNumber"/>
+                        <xs:attribute type="Device" name="device"/>
+                        <xs:attribute type="Department" name="department"/>
+                        <xs:attribute type="xs:boolean" name="publish"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

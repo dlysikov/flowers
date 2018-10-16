@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">Invitation to validate/sign the application form for a user</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+Dear delegated identification agent,
+<br/><br/>
+In order to validate the user's application form, we invite you to sign it electronically using your LuxTrust certificate. Please, pay attention that user has approved remote identification.
+The user certificate will be generated after successful remote identification. By signing, you validate the content of the application form, authorise LuxTrust to provide the user with a LuxTrust
+certificate and accept the general terms and conditions of LuxTrust (<a href="http://gtc.luxtrust.lu">gtc.luxtrust.lu</a>).
+<br/><br/><br/>
+Click <a th:href="@{${baseLink} + '/certificate-orders/details/' + ${orderId}}">here</a> to sign.
+</body>
+</html>

@@ -1,0 +1,47 @@
+<div [formGroup]="form">
+<div class="row valign-wrapper" *ngIf="control.visible">
+  <div class="col s12">
+    <mz-select-container>
+      <select mz-select
+              [compareWith]="equalsById"
+              (change)="selectRequestor()"
+              id="requestor-select"
+              label="{{ 'order.holder.requestor' | translate }}"
+              [disabled]="control.disabled"
+              [ngModelOptions]="{standalone: true}"
+              [(ngModel)]="requestor">
+        <option [ngValue]="null"></option>
+        <option *ngFor="let requestor of services| orderBy: 'name'" [ngValue]="requestor">{{requestor.name}}</option>
+      </select>
+
+    </mz-select-container>
+  </div>
+</div>
+
+<div class="row valign-wrapper" *ngIf="control.visible">
+  <div class="col s12">
+    <div [ngClass]="{'flowers-invalid': fieldFormHasErrors()}">
+      <mz-select-container>
+        <select mz-select
+                id="unit-select"
+                [compareWith]="equalsById"
+                (change)="selectUnit()"
+                label="{{ 'eseal.unit' | translate }}{{getRequired()}}"
+                [disabled]="control.disabled"
+                [formControl]="formControl"
+                [(ngModel)]="entity.unit">
+          <option [ngValue]="null"></option>
+          <ng-container *ngFor="let unit of units| orderBy: 'commonName'">
+            <option *ngIf="requestor == null || requestor.id == unit.requestor.id" [ngValue]="unit">{{unit.commonName}}</option>
+          </ng-container>
+        </select>
+
+        <div class="error-container" *ngIf=" fieldFormHasErrors()">
+          <app-error *ngIf="formControl.errors.required" [errorMsg]="'eseal.errors.unit-required' | translate"></app-error>
+        </div>
+
+      </mz-select-container>
+    </div>
+  </div>
+</div>
+</div>

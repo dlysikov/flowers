@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">Invitation to validate/sign the application form for a user</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+Hello dear,
+<br/><br/>
+In order to validate the user's order, please sign it electronically using your LuxTrust credentials in case of user's data are valid.<br/>
+The user certificate will then be generated and the codes will be sent to him/her in order to activate the certificate.<br/>
+By signing this order you validate the content of the document, authorise LuxTrust to provide the user with certificate and accept the general terms and conditions of LuxTrust (<a href="http://gtc.luxtrust.lu">gtc.luxtrust.lu</a>).<br/>
+This will result in the creation of a contract.<br/>
+The delegated identification official will inform the user of all the obligations relating to the 'LuxTrust General Terms and Conditions' contract.<br/>
+<br/>
+<br/>
+<br/>
+Click on the <a th:href="@{${baseLink} + '/certificate-orders/details/' + ${order.getId()}}">link</a> to validate the information.
+</body>
+</html>

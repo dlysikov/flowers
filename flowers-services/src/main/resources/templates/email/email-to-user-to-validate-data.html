@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title th:remove="all">DG-SANTE: Request to validate your information</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+Dear User,
+<br/><br/>
+We invite you to click on the <a th:href="@{${baseLink} + '/certificate-orders/user/' + ${pageHash}}">link</a> to complete and validate your personal data and application form.<br/>
+After validation, your LuxTrust certificate will be generated. This certificate allows you to securely log in your banking or online applications, or to electronically sign documents.
+<br/><br/><br/>
+Incorrect information? You may modify it before validation.<br/>
+If not yet provided, scan a copy of your valid ID document (passport or front and back of ID card). You will be required to upload this copy during the process.
+<br/>
+<br/>
+Thank you for your trust,<br/>
+LuxTrust Management
+<br/>
+<br/>
+<br/>
+Cher Utilisateur,
+<br/><br/>
+Nous vous invitons à cliquer sur le <a th:href="@{${baseLink} + '/certificate-orders/user/' + ${pageHash}}">lien</a> pour compléter et valider avec attention vos données personnelles ainsi que le formulaire de demande.<br/>
+Après validation, votre certificat LuxTrust sera généré. Ce certificat vous permet de vous connecter en toute sécurité à vos applications bancaires ou en ligne ou encore pour signer des documents.
+<br/><br/><br/>
+Si certaines informations sont incorrectes, vous avez la possibilité de les modifier avant de valider le formulaire.<br/>
+Si encore non fournie, scannez la copie de votre pièce d'identité valide (passeport ou recto/verso de votre carte d'identité). Vous aurez à la télécharger durant le processus.
+<br/>
+<br/>
+Nous vous remercions pour votre confiance,<br/>
+La direction de LuxTrust
+</body>
+</html>

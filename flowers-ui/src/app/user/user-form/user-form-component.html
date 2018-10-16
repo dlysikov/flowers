@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="row valign-wrapper">
+    <div class="col s12">
+      <div class="details-header"><h5 id="user-title">{{ 'user.title' | translate }}</h5></div>
+      <app-back-to-list class="left back-to-list" (click)="changePage('/users')" [label]="'app.back-to-list' | translate"></app-back-to-list>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-content">
+
+          <form [formGroup]="form" novalidate>
+
+            <app-input label="user.id"
+                       [formContext]="formContext"
+                       [param]="{disabled:true}"
+                       [path]="['id']"></app-input>
+
+            <app-unit-select [selectUnitAction]="unitSelected" [formContext]="formContext"></app-unit-select>
+
+            <app-select #rolesSelect [path]="['roles']" label="user.role" errorLabel="user.errors.roles" [translateViewPrefix]="'user.roles.'" [multiple]="true"
+                        [formContext]="formContext" [values]="rolesToCreate" [param]="{required: true}" [condition]="rolesCondition()" [selectAction]="handleRoles()"></app-select>
+
+            <app-input label="user.ssn"
+                       errorLabel="user.errors.ssn"
+                       [formContext]="formContext"
+                       [param]="{max:50, required: true}"
+                       [path]="['ssn']"></app-input>
+
+            <app-input label="user.firstName"
+                       errorLabel="user.errors.firstName"
+                       [formContext]="formContext"
+                       [param]="{max:60, required: true}"
+                       [path]="['firstName']"></app-input>
+
+            <app-input label="user.surName"
+                       errorLabel="user.errors.surName"
+                       [formContext]="formContext"
+                       [param]="{max:60, required: true}"
+                       [path]="['surName']"></app-input>
+
+            <app-input label="user.email"
+                       errorLabel="user.errors.email"
+                       [formContext]="formContext"
+                       [param]="{max:100, required: true}"
+                       [path]="['email']"></app-input>
+
+            <app-input label="user.phoneNumber"
+                       errorLabel="user.errors.phoneNumber"
+                       [formContext]="formContext"
+                       [param]="{max: 20, min: 5, mask: phoneMask}"
+                       [path]="['phoneNumber']"></app-input>
+
+            <app-select label="user.nationality"
+                        errorLabel="user.errors.nationality"
+                        translateViewPrefix="nationality."
+                        [values]="nationalities"
+                        [formContext]="formContext"
+                        [path]="['nationality']"></app-select>
+
+            <app-date-input label="user.birthDate"
+                            errorLabel="user.errors.birthDate"
+                            [formContext]="formContext"
+                            [path]="['birthDate']"></app-date-input>
+
+            <app-select id="certificateType"
+                        label="user.certificateType"
+                        errorLabel="user.errors.certificateType"
+                        translateViewPrefix="user.certificateTypes."
+                        [objectContent]="false"
+                        [values]="certificateTypeList"
+                        [formContext]="formContext"
+                        [param]="{required: true}"
+                        [path]="['certificateType']"></app-select>
+
+
+            <app-select id="defaultLanguage"
+                        label="user.defaultLanguage"
+                        errorLabel="user.errors.language"
+                        [values]="languages"
+                        [formContext]="formContext"
+                        [param]="{required: true}"
+                        [path]="['defaultLanguage']"></app-select>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row valign-wrapper buttons-align">
+    <div class="col s2">
+      <app-back-to-list class="left back-to-list" (click)="changePage('/users')" [label]="'app.back-to-list' | translate"></app-back-to-list>
+    </div>
+    <div class="col s8 offset-s2 right-align">
+      <button *ngxPermissionsOnly="['CREATE_USER','EDIT_USER']" mz-button class="btn-blue" (click)="saveUser()" id="save-btn">{{'app.btn.save'|translate}}</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12">
+      <div class="flowers-invalid center" *ngIf="formGlobalMsg.type == 'FAILED'">
+        <div *ngFor="let code of formGlobalMsg.codes; let i = index"><h5 [id]="'error-message-' + (i+1)">{{'user.errors.global-' + code | translate:entity}}</h5></div>
+      </div>
+      <div class="flowers-success center" *ngIf="formGlobalMsg.type == 'SUCCESS'">
+        <div *ngFor="let code of formGlobalMsg.codes; let i = index"><h5 [id]="'success-message-' + (i+1)">{{'user.messages.' + code | translate:entity}}</h5></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng4-loading-spinner [template]="loaderTemplate"></ng4-loading-spinner>
+
+
+

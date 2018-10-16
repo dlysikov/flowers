@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="header-wrapper">
+
+    <div class="row valign-wrapper">
+      <div class="col s2">
+        <app-back-to-list class="left" (click)="backToMain()" [label]="'manage-orders.back-to-dashboard' | translate"></app-back-to-list>
+      </div>
+      <div class="col s8">
+        <h5 id="manage-eseal-orders-title" class="center-align">{{ 'manage-eseal-orders.title' | translate }}</h5>
+      </div>
+      <div class="col s2 right-align ">
+        <a *ngxPermissionsOnly="['CREATE_ESEALORDER']"  id="add-new-button" class="btn btn-green strong" [routerLink]="['details']">{{ 'manage-eseal-orders.buttons.add-new' | translate }}</a>
+      </div>
+    </div>
+
+    <app-field-filter (initialFilters)="setInitialFilters($event)" (filtersChanged)="applyFilters($event)" [filterName]="'esealOrdersFilter'" [fields]="filterFields"></app-field-filter>
+
+  </div>
+  <app-eseal-orders-list [eseals]="items"></app-eseal-orders-list>
+
+  <app-pagination [totalItems]="itemsCount" [currentPage]="currentPage" [pageSize]="itemsPerPage" (pageChanged)="changePage($event)"></app-pagination>
+</div>
+
+<ng4-loading-spinner [template]="loaderTemplate"></ng4-loading-spinner>

@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form name="ORELYFORM" action="#" th:action="${destination}" method="post">
+    SSN: <select name="ssn">
+    <option th:each="user : ${users}" th:value="${user.ssn}"><b>SSN:</b> <span th:text="${user.ssn}"></span>, <b>ID:</b> <span th:text="${user.id}"></span>, <b>EMAIL:</b> <span th:text="${user.email}"></span>, <b>ROLES:</b> <span th:text="${user.roles}"></span> </option>
+         </select><input type="submit" value="Submit" />
+</form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<div class="row flow-text valign-wrapper">
+  <div class="col s6 valign-wrapper">
+      <div class="left" style="margin-right:30px; width:250px">
+        <mz-select-container #filterSelect>
+          <select mz-select [compareWith]="fieldEquals" id="options-select" [(ngModel)]="filter.field" [label]="'app.field-filter.search-by' | translate" (change)="filter.value = null">
+            <option></option>
+            <option *ngFor="let field of fields; let i = index"
+                    [ngValue]="field"
+                    [id]="'search-by-field-' + (i+1)">{{field.label | translate}}</option>
+          </select>
+        </mz-select-container>
+      </div>
+      <div class="left" style="margin-right:15px; width:250px">
+        <mz-input-container *ngIf="filter.field == null || filter.field.values == null">
+          <input mz-input id="search-input" placeholder="{{ 'app.field-filter.what-to-search' | translate }}"
+                 type="text"
+                 [(ngModel)]="filter.value"
+                 [ngModelOptions]="{standalone: true}"/>
+        </mz-input-container>
+        <mz-select-container *ngIf="filter.field != null && filter.field.values != null">
+          <select multiple mz-select [filledIn]="true" [compareWith]="equalsById" [(ngModel)]="filter.value" [ngModelOptions]="{standalone: true}" [placeholder]="'&nbsp;'">
+             <option *ngFor="let value of filter.field.values.values" [ngValue]="value">{{(filter.field.values.translationPrefix||'') + getValueToDisplay(value) | translate}}</option>
+          </select>
+        </mz-select-container>
+      </div>
+      <div class="left">
+        <span
+              *ngIf="filter != null && filter.field != null &&  filter.value != null && filter.value != ''">
+          <i id="accept-filter-button" class="material-icons left clickable" (click)="changeActiveFilters()">done</i>
+        </span>
+        <span
+              *ngIf="filter != null && (filter.field != null || filter.value != null && filter.value != '')">
+          <i id="clear-filter-button" class="material-icons left clickable" (click)="clearFilter()">clear</i>
+        </span>
+      </div>
+  </div>
+
+  <div class="col s5 offset-s1 active-filter-wrapper right-align">
+    <div *ngIf="activeFilters?.length > 0">
+      <span id="active-filters-title">{{'app.active-filters.title' | translate}}</span>
+      <a [id]="'active-filter-button-' + (i+1)" class="waves-effect waves-light filter-btn" *ngFor="let item of activeFilters; let i = index;">
+        <i class="material-icons right" (click)="deleteActiveFilter(item)">close</i>
+        <span *ngIf="item.field.values == null">{{item.field.label| translate}}:{{getActiveFilterValueToDisplay(item, item.value)}}</span>
+        <span *ngIf="item.field.values != null">{{item.field.label| translate}}:
+          <span *ngFor="let itemV of item.value;let i = index">{{(item.field.values.translationPrefix||'') + getActiveFilterValueToDisplay(item,itemV) | translate}}<span *ngIf="i < item.value.length - 1"> , </span></span>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>

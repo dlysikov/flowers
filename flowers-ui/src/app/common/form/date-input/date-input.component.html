@@ -1,0 +1,63 @@
+<div class="row " [formGroup]="form"
+     [ngClass]="{'flowers-invalid': errorLabel != null && fieldFormHasErrors()}">
+  <div class="col s3 ">
+    <div [ngClass]="{'with-info' : tooltip != null}">
+
+      <label class="date-label"
+             [for]="id + '-label'">{{label | translate}} (dd/MM/yyyy){{getRequired()}}</label>
+
+      <div class="col">
+        <mz-input-container id="{{id}}">
+          <input mz-input
+                 class="date-input"
+                 [attr.id]="id + '-day'"
+                 [placeholder]="'app.date.day' | translate"
+                 [disabled]="control.disabled"
+                 [(ngModel)]="day"
+                 [ngModelOptions]="{standalone: true}"
+                 (change)="changeDate($event)"
+                 data-length="2"
+                 [maxlength]="'2'"
+                 [textMask]="{mask: dayMask, guide: false}"
+          />
+          <span>/</span>
+
+          <input mz-input
+                 class="date-input"
+                 [attr.id]="id + '-month'"
+                 [placeholder]="'app.date.month' | translate"
+                 [disabled]="control.disabled"
+                 [(ngModel)]="month"
+                 [ngModelOptions]="{standalone: true}"
+                 (change)="changeDate($event)"
+                 data-length="2"
+                 [maxlength]="'2'"
+                 [textMask]="{mask: monthMask, guide: false}"
+          />
+          <span>/</span>
+          <input mz-input
+                 class="date-input "
+                 [attr.id]="id + '-year'"
+                 [placeholder]="'app.date.year' | translate"
+                 [disabled]="control.disabled"
+                 [(ngModel)]="year"
+                 [formControl]="formControl"
+                 (change)="changeDate($event)"
+                 data-length="4"
+                 [maxlength]="'4'"
+                 [textMask]="{mask: yearMask, guide: false}"
+          />
+          <div *ngIf="errorLabel != null && fieldFormHasErrors()" class="error-container">
+            <app-error *ngIf="formControl.errors.required" [errorMsg]="errorLabel + '-required' | translate "></app-error>
+            <app-error *ngIf="formControl.errors.invalid" [errorMsg]="errorLabel + '-invalid' | translate "></app-error>
+          </div>
+          <app-error *ngIf="fieldFormHasErrors() && formControl.errors.format" [errorMsg]="'errors.date-format' | translate "></app-error>
+        </mz-input-container>
+      </div>
+
+
+    </div>
+    <app-info id="{{id + '-tooltip'}}" [tooltipText]="tooltip | translate" *ngIf="tooltip"
+              [position]="'right'"></app-info>
+  </div>
+</div>

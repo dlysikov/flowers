@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    window.parent.postMessage({
+            reload:true
+        }
+        , '*');
+    /*]]>*/
+</script>
+
+</body>
+</html>

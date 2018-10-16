@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">Invitation to validate/sign the application form for a user</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+Dear delegated identification agent,
+<br/>
+In order to validate the user's application form, we invite you to sign it electronically using your LuxTrust certificate.<br/>
+By signing, you validate the content of the application form, authorise LuxTrust to provide the user with a LuxTrust certificate and accept the general terms and conditions of LuxTrust (<a href="http://gtc.luxtrust.lu">gtc.luxtrust.lu</a>).<br/>
+<br/>
+Click <a th:href="@{${baseLink} + '/certificate-orders/details/' + ${order.getId()}}">here</a> to sign.<br/>
+<br/>
+We thank you for your trust,<br/>
+LuxTrust Management
+
+<br/><br/><br/>
+
+Cher Agent identifiant délégué,
+<br/>
+Afin de valider la demande pour un certificat pour  l'utilisateur <b><span th:text="${order.getHolder().getSurName()}">user</span> <span th:text="${order.getHolder().getFirstName()}"></span></b>, nous vous invitons à la signer électroniquement, à l’aide de votre dispositif LuxTrust.<br/>
+En tant qu'agent d'identification délégué, en signant cette commande, vous validez le contenu du document, autorisez LuxTrust à fournir à l'utilisateur un certificat LuxTrust et acceptez les conditions générales de LuxTrust (<a href="http://gtc.luxtrust.lu">gtc.luxtrust.lu</a>).<br/>
+<br/>
+Cliquez <a th:href="@{${baseLink} + '/certificate-orders/details/' + ${order.getId()}}">ici</a> pour signer.<br/>
+<br/>
+Nous vous remercions pour votre confiance,<br/>
+La direction de LuxTrust
+</body>
+</html>

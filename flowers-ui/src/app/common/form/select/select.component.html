@@ -1,0 +1,40 @@
+<div class="row valign-wrapper" [ngClass]="{'flowers-invalid': errorLabel != null && fieldFormHasErrors()}" *ngIf="control.visible">
+  <div class="col s12" [formGroup]="form"  >
+    <div [ngClass]="{'with-info' : tooltip != null}"  >
+      <mz-select-container #select id="{{id}}">
+        <select mz-select *ngIf="!multiple"
+                [attr.id]="id + '-select'"
+                [compareWith]="equalsById"
+                [label]="(label | translate) + getRequired()"
+                [disabled]="control.disabled"
+                (change)="submit($event)"
+                [(ngModel)]="value"
+                [formControl]="formControl">
+          <option [ngValue]="null" [id]="id + '-0'"></option>
+          <ng-container *ngFor="let value of values; let i = index">
+            <option *ngIf="showCondition(value)" [ngValue]="value" [id]="id + '-' + (i + 1)">{{showOption(value)}}</option>
+          </ng-container>
+        </select>
+
+        <select mz-select multiple *ngIf="multiple"
+                [filledIn]="true"
+                [attr.id]="id + '-select'"
+                [compareWith]="equalsById"
+                [label]="(label | translate) + getRequired()"
+                [disabled]="control.disabled"
+                (change)="submit($event)"
+                [(ngModel)]="value"
+                [formControl]="formControl">
+          <option [ngValue]="null" [id]="id + '-0'" [disabled]="true"></option>
+          <ng-container *ngFor="let value of values; let i = index">
+            <option *ngIf="showCondition(value)" [ngValue]="value" [id]="id + '-' + (i + 1)">{{showOption(value)}}</option>
+          </ng-container>
+        </select>
+        <div class="error-container" *ngIf="errorLabel != null && fieldFormHasErrors()">
+          <app-error id="{{id + '-required'}}" *ngIf="formControl.errors.required" [errorMsg]="errorLabel + '-required' | translate"></app-error>
+        </div>
+      </mz-select-container>
+    </div>
+    <app-info id="{{id + '-tooltip'}}" [tooltipText]="tooltip | translate" *ngIf="tooltip"></app-info>
+  </div>
+</div>

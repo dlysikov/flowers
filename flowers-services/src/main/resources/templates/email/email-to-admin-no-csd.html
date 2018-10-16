@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">No CSD Agents</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+Dear FLOWERS Admin,
+<br/><br/>
+There are no users with role CSD Agent in Flowers.
+Please, setup at least one and inform him/her that an order for <span th:text="${order.getHolder().getFirstName()}">user</span> <span th:text="${order.getHolder().getSurName()}"></span> has to be validated.
+<br/>
+<br/>
+Thank you for your trust,<br/>
+LuxTrust Management
+</body>
+</html>

@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="header-wrapper">
+
+    <div class="row valign-wrapper">
+      <div class="col s4">
+        <app-back-to-list class="left" (click)="backToMain()" [label]="'manage-orders.back-to-dashboard' | translate"></app-back-to-list>
+      </div>
+      <div class="col s3">
+        <h5 class="right" id="manage-users-title">{{ 'manage-users.title' | translate }}</h5>
+      </div>
+      <div class="col s5 right-align ">
+        <a id="manage-users-add-new-btn" *ngxPermissionsOnly="['CREATE_USER']" class="btn btn-green strong" [routerLink]="['details']">{{ 'manage-users.buttons.add-new-user' | translate }}</a>
+      </div>
+    </div>
+
+    <app-field-filter (initialFilters)="setInitialFilters($event)" (filtersChanged)="applyFilters($event)" [filterName]="'usersFilter'" [fields]="filterFields"></app-field-filter>
+
+  </div>
+  <app-users-list [users]="items"></app-users-list>
+
+  <app-pagination [totalItems]="itemsCount" [currentPage]="currentPage" [pageSize]="itemsPerPage" (pageChanged)="changePage($event)"></app-pagination>
+</div>
+
+<ng4-loading-spinner [template]="loaderTemplate"></ng4-loading-spinner>

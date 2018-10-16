@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    window.parent.postMessage({
+            jwt: [[${jwt}]],
+            reload:false,
+            refreshJwt: [[${refreshJwt}]],
+            authentication: [[${authentication}]]
+        }
+        , '*');
+    /*]]>*/
+</script>
+
+</body>
+</html>

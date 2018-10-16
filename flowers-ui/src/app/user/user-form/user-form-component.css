@@ -1,0 +1,10 @@
+.back-to-list {
+  position:relative;
+  z-index: 997;
+}
+.clear-data {
+  position: absolute;
+  top: 38.2rem;
+  right: 1rem;
+  z-index:997;
+}

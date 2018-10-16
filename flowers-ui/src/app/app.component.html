@@ -1,0 +1,30 @@
+<html>
+<head></head>
+<body>
+<nav>
+  <div class="nav-wrapper">
+    <a [routerLink]="['/']" class="brand-logo">
+      <img [src]="logoURL"/>
+    </a>
+    <ul class="lang-select">
+      <li><a mz-button class="dropdown-trigger btn-lang" id="btn-language-dropdown">{{currentLanguage?.twoCharsCode | uppercase}}<i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+    <div *ngIf="userSession.isSignedIn()" class="right valign-wrapper user-profile-block" style="height: inherit">
+      <div class="left valign-wrapper">
+        <div style="line-height: normal;text-align: right">
+          <span class="user-name">{{userSession.getAuthentication().details.givenName + " " + userSession.getAuthentication().details.surname}}</span><br/>
+          <a (click)="logout()" class="logout">{{"app.user-profile-block.logout" | translate}}</a>
+        </div>
+      </div>
+      <img class="user-profile-logo" [src]="userProfileImgURL"/>
+    </div>
+  </div>
+</nav>
+<mz-dropdown [id]="'language-dropdown'" [dropdownButtonId]="'btn-language-dropdown'">
+  <mz-dropdown-item *ngFor="let lang of languages" (click)="switchLanguage(lang)">
+    <a>{{lang.twoCharsCode | uppercase}}</a>
+  </mz-dropdown-item>
+</mz-dropdown>
+<router-outlet></router-outlet>
+</body>
+</html>

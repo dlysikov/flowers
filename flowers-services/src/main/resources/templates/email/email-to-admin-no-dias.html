@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:remove="all">Unit without assigned DIA</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+Dear FLOWERS Admin,
+<br/><br/>
+There is a unit <span th:text="${order.getUnit().getCommonName()}"></span> without assigned DIA.
+Please, assign unit to a proper DIA and inform him/her that an order for <span th:text="${order.getHolder().getFirstName()}">user</span> <span th:text="${order.getHolder().getSurName()}"></span> has to be validated.
+<br/>
+<br/>
+Thank you for your trust,<br/>
+LuxTrust Management
+</body>
+</html>

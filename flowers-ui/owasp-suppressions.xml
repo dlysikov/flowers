@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.1.xsd">
+    <!--
+    This file is for project-specific suppression of known CVE vulnerabilities in dependencies
+
+    PLEASE NOTE: The nominal state of this file is to be *EMPTY* !
+
+    Suppressions are centralized in the project luxtrust-common:luxtrust-owasp-suppressions managed by the security team
+    Please contact them to assess the risk and to add a new suppression in the centralized file.
+
+    Nevertheless it is allowed to *temporarily* add a suppression here to unblock a build while waiting for centralized
+    update or in emergency (a CVE might appear unexpectedly at any time) but keep in mind that it is a security risk.
+    -->
+</suppressions>

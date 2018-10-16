@@ -1,0 +1,8 @@
+.pf {
+  margin: 0!important;
+}
+
+::ng-deep .modal {
+  width:1250px;
+  height:800px;
+}

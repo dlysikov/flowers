@@ -1,0 +1,9 @@
+.back-to-list {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.back-to-list-arrow {
+  top: 0.4rem;
+  position: relative;
+}

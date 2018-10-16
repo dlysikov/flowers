@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-content">
+    <table class="highlight bordered">
+      <thead>
+      <tr>
+        <th width="10%" id="eseal-order-id-header">{{ 'manage-eseal-orders.list.id' | translate }}</th>
+        <th width="20%" id="eseal-requestor-header">{{ 'manage-eseal-orders.list.requestor' | translate }}</th>
+        <th width="20%" id="eseal-unit-header">{{ 'manage-eseal-orders.list.unit' | translate }}</th>
+        <th width="20%" id="eseal-organisation-unit-header">{{ 'manage-eseal-orders.list.organisation-unit' | translate }}</th>
+        <th width="20%" id="eseal-organisation-status-header">{{ 'manage-eseal-orders.list.status' | translate }}</th>
+        <th width="10%" id="eseal-actions-header" class="right-align">{{ 'manage-orders.list.actions' | translate }}</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let eseal of eseals; let i = index"
+      [id]="'eseal-row-' + (i + 1)">
+        <td [id]="'eseal-row-id-' + (i + 1)" >{{eseal.id}}</td>
+        <td [id]="'eseal-row-requestor-' + (i + 1)" >{{eseal.unit?.requestor?.name}}</td>
+        <td [id]="'eseal-row-unit-' + (i + 1)" >{{eseal.unit?.commonName}}</td>
+        <td [id]="'eseal-row-organisational-unit-' + (i + 1)" >{{eseal.organisationalUnit}}</td>
+        <td [id]="'eseal-row-id-status' + (i + 1)" >{{'order.statuses.' + eseal.status | translate}}</td>
+        <td class="right-align">
+          <i class="material-icons  actions"
+             [id]="'eseal-edit-' + (i + 1)"
+             [routerLink]="['details', eseal.id]">edit</i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

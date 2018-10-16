@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="header-wrapper">
+
+
+    <div class="row valign-wrapper">
+      <div class="col s4">
+        <app-back-to-list class="left" (click)="backToMain()" [label]="'manage-orders.back-to-dashboard' | translate"></app-back-to-list>
+      </div>
+      <div class="col s3">
+        <h5 class="right" id="manage-orders-title">{{ 'manage-orders.title' | translate }}</h5>
+      </div>
+      <div class="col s5 right-align ">
+        <label for="ordersXMLUpload" *ngxPermissionsOnly="['CREATE_IN_BATCH_CERTIFICATEORDER']">
+          <a class="btn btn-blue strong import-user" id="import-order"><i class="material-icons medium left">file_download</i>{{'manage-orders.buttons.import-users' | translate}}</a>
+          <input #ordersXMLInput id="ordersXMLUpload" name="file" type="file" accept=".xml" (change)="importOrdersFromXML($event)"/>
+        </label>
+        <a *ngxPermissionsOnly="['CREATE_CERTIFICATEORDER']" class="btn btn-green strong" [routerLink]="['details']" id="add-new-btn"><i class="material-icons medium left">add</i>{{ 'manage-orders.buttons.add-new-user' | translate }}</a>
+      </div>
+    </div>
+
+    <app-field-filter (initialFilters)="setInitialFilters($event)" (filtersChanged)="applyFilters($event)" [filterName]="'order-filters'" [fields]="filterFields"></app-field-filter>
+
+  </div>
+  <app-certificate-orders-list [orders]="items"></app-certificate-orders-list>
+
+  <app-pagination [totalItems]="itemsCount" [currentPage]="currentPage" [pageSize]="itemsPerPage" (pageChanged)="changePage($event)"></app-pagination>
+</div>
+
+<ng4-loading-spinner [template]="loaderTemplate"></ng4-loading-spinner>

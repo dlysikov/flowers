@@ -1,0 +1,115 @@
+<div class="container">
+    <div class="row valign-wrapper">
+        <div class="col s12">
+          <div class="details-header"><h5 id="unit-title">{{'unit.title' | translate}}</h5></div>
+          <app-back-to-list class="left back-to-list" (click)="changePage('/units')" [label]="'app.back-to-list' | translate"></app-back-to-list>
+        </div>
+    </div>
+  <div class="row">
+    <div class="card">
+      <div class="card-content">
+
+          <form [formGroup]="form" novalidate>
+
+            <app-select [path]="['requestor']"
+                        label="unit.requestor"
+                        errorLabel="unit.errors.requestor"
+                        [formContext]="formContext"
+                        [values]="services"
+                        [param]="{required:true}"></app-select>
+
+            <app-select [path]="['country']"
+                        translateViewPrefix="country."
+                        label="unit.country"
+                        errorLabel="unit.errors.country"
+                        [formContext]="formContext"
+                        [values]="countries"
+                        [param]="{required:true}"></app-select>
+
+            <app-input [path]="['postCode']"
+                       label="unit.postCode"
+                       errorLabel="unit.errors.postCode"
+                       [formContext]="formContext"
+                       [param]="{max:15, required:true}"></app-input>
+
+
+            <app-input [path]="['city']"
+                       label="unit.city"
+                       errorLabel="unit.errors.city"
+                       [formContext]="formContext"
+                       [param]="{max:50, required:true}"></app-input>
+
+            <app-input [path]="['streetAndHouseNo']"
+                       label="unit.streetAndHouseNo"
+                       errorLabel="unit.errors.streetAndHouseNo"
+                       [formContext]="formContext"
+                       [param]="{max:35, required:true}"></app-input>
+
+            <app-input [path]="['companyName']"
+                       label="unit.company-name"
+                       errorLabel="unit.errors.companyName"
+                       [formContext]="formContext"
+                       [param]="{max:50, required:true}"></app-input>
+
+            <app-input [path]="['commonName']"
+                       label="unit.common-name"
+                       errorLabel="unit.errors.commonName"
+                       [formContext]="formContext"
+                       [param]="{max:50, required:true}"></app-input>
+
+            <app-select [path]="['identifier', 'type']"
+                        label="unit.company-identifier-type"
+                        errorLabel="unit.errors.identifierType"
+                        [objectContent]="false"
+                        [formContext]="formContext"
+                        [values]="companyIdentifierTypes"
+                        [param]="{required:true}"></app-select>
+
+            <app-input [path]="['identifier', 'value']"
+                       label="unit.company-identifier-value"
+                       errorLabel="unit.errors.identifierValue"
+                       [formContext]="formContext"
+                       [param]="{max:15, required:true}"></app-input>
+
+            <app-input [path]="['phoneNumber']"
+                       label="unit.phone-number"
+                       errorLabel="unit.errors.phoneNumber"
+                       [formContext]="formContext"
+                       [param]="{max:20, min:5, mask: phoneMask}"></app-input>
+
+            <app-input [path]="['eMail']"
+                       label="unit.email"
+                       errorLabel="unit.errors.email"
+                       [formContext]="formContext"
+                       [param]="{max:100}"></app-input>
+
+          </form>
+      </div>
+    </div>
+  </div>
+  <div class="row valign-wrapper buttons-align">
+    <div class="col s2">
+      <app-back-to-list class="left back-to-list" (click)="changePage('/units')" [label]="'app.back-to-list' | translate"></app-back-to-list>
+    </div>
+    <div class="col s8 offset-s2 right-align">
+      <button *ngIf="formButtons.deleteBtn.visible" [disabled]="!formButtons.deleteBtn.enabled" id="unit-delete-btn" mz-button class="btn-red" (click)="deleteUnit()">{{'app.btn.delete'|translate}}</button>
+      <button *ngIf="formButtons.createBtn.visible" [disabled]="!formButtons.createBtn.enabled" id="unit-create-btn" mz-button class="btn-blue" (click)="createUnit()">{{'app.btn.save'|translate}}</button>
+      <button *ngIf="formButtons.updateBtn.visible" [disabled]="!formButtons.updateBtn.enabled" id="unit-update-btn" mz-button class="btn-blue" (click)="updateUnit()">{{'app.btn.save'|translate}}</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12">
+      <div class="flowers-invalid center" *ngIf="formGlobalMsg.type == 'FAILED'">
+        <div *ngFor="let code of formGlobalMsg.codes; let i = index"><h5 [id]="'error-message-' + (i+1)">{{'unit.errors.global-' + code | translate:{'type':
+          duplicateIdenifier.type, 'value': duplicateIdenifier.value} }}</h5></div>
+      </div>
+      <div class="flowers-success center" *ngIf="formGlobalMsg.type == 'SUCCESS'">
+        <div *ngFor="let code of formGlobalMsg.codes; let i = index"><h5 [id]="'sucess-message-' + (i+1)">{{'unit.messages.' + code | translate}}</h5></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ng4-loading-spinner [template]="loaderTemplate"></ng4-loading-spinner>

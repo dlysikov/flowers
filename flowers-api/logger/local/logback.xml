@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%cyan(TOOLS   %d) %highlight(%-5level) %green(%logger{85}) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT-APP" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%boldRed(FLOWERS %d) %highlight(%-5level) %boldGreen(%logger{85}) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT-HIBERNATE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%magenta(SQL     %d) %highlight(%-5level) %green(%logger{85}) - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger level="INFO" name="lu.luxtrust.flowers" additivity="false">
+        <appender-ref ref="STDOUT-APP"/>
+    </logger>
+
+    <logger level="DEBUG" name="org.hibernate.SQL" additivity="false">
+        <appender-ref ref="STDOUT-HIBERNATE"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

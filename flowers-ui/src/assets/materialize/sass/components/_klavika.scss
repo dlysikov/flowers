@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "Klavika";
+  src: local(Klavika Light),
+  url("#{$klavika-font-path}klavika-light-webfont.woff") format("woff"),
+  url("#{$klavika-font-path}klavika-light-webfont.ttf") format("ttf"),
+  url("#{$klavika-font-path}klavika-light-webfont.eot") format("eot"),
+  url("#{$klavika-font-path}klavika-light-webfont.svg") format("svg");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Klavika";
+  src: local(Klavika Regular),
+  url("#{$klavika-font-path}klavika-regular-webfont.woff") format("woff"),
+  url("#{$klavika-font-path}klavika-regular-webfont.ttf") format("ttf"),
+  url("#{$klavika-font-path}klavika-regular-webfont.eot") format("eot"),
+  url("#{$klavika-font-path}klavika-regular-webfont.svg") format("svg");
+
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: local(Klavika Medium),
+  url("#{$klavika-font-path}klavika-medium-webfont.woff") format("woff"),
+  url("#{$klavika-font-path}klavika-medium-webfont.ttf") format("ttf"),
+  url("#{$klavika-font-path}klavika-medium-webfont.eot") format("eot"),
+  url("#{$klavika-font-path}klavika-medium-webfont.svg") format("svg");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Klavika";
+  src: local(Klavika Bold),
+  url("#{$klavika-font-path}klavika-bold-webfont.woff") format("woff"),
+  url("#{$klavika-font-path}klavika-bold-webfont.ttf") format("ttf"),
+  url("#{$klavika-font-path}klavika-bold-webfont.eot") format("eot"),
+  url("#{$klavika-font-path}klavika-bold-webfont.svg") format("svg");
+  font-weight: 700;
+}

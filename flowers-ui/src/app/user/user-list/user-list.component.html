@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="card-content">
+    <table class="highlight bordered">
+      <thead>
+      <tr>
+        <th id="user-list-header-first-name" width="30%">{{ 'manage-users.list.first-name' | translate }}</th>
+        <th id="user-list-header-last-name" width="30%">{{ 'manage-users.list.last-name' | translate }}</th>
+        <th id="user-list-header-role" width="30%">{{ 'manage-users.list.role' | translate }}</th>
+        <th id="user-list-header-actions" width="10%" class="right-align">{{ 'manage-orders.list.actions' | translate }}</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let user of users; let i = index">
+        <td [id]="'user-list-first-name-' + (i+1)">{{user.firstName}}</td>
+        <td [id]="'user-list-last-name-' + (i+1)">{{user.surName}}</td>
+        <td [id]="'user-list-roles-' + (i+1)">
+          <span *ngFor="let role of user.roles; let i=index">
+            {{'user.roles.' + role.roleType | translate }}<span *ngIf="i<user.roles.length-1">, </span>
+          </span>
+        </td>
+        <td class="right-align">
+          <i class="material-icons  actions"
+             [id]="'user-list-edit-' + (i+1)"
+             [routerLink]="['details', user.id]"
+          >edit</i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

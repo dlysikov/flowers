@@ -1,0 +1,20 @@
+
+input[type="file"] {
+  display: none;
+}
+
+.strong {
+  font-weight: bold;
+}
+
+.add-new-user {
+  background-color: #8dc63f;
+  text-transform: capitalize;
+}
+
+.import-user {
+  margin-right: 15px;
+}
+
+
+

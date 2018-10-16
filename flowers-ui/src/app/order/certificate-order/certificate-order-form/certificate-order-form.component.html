@@ -1,0 +1,323 @@
+<div class="container">
+  <div class="row ">
+    <div class="col s12 center-align">
+      <app-back-to-list *ngIf="actionButtons.backToList.visible"
+                        class="left"
+                        (click)="changePage('/certificate-orders')"
+                        [label]="'app.back-to-list' | translate"></app-back-to-list>
+      <h5 id="certificate-order-title">
+        {{ 'manage-orders.new-order.panel-title' | translate }}
+      </h5>
+    </div>
+  </div>
+
+  <form [formGroup]="form" novalidate>
+
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title" id="order-info-title">{{ 'order.title' | translate }}</span>
+
+        <app-input label="order.id" [path]="['id']" [param]="{disabled: true}" [formContext]="formContext"></app-input>
+        <app-input label="order.lrsOrderNumber" [path]="['lrsOrderNumber']" [param]="{disabled: true}" [formContext]="formContext"></app-input>
+        <app-input label="order.holder.ssn" [path]="['ssn']" [param]="{disabled: true}" [formContext]="formContext"></app-input>
+
+        <div class="row valign-wrapper" *ngIf="orderFormConfig.device.visible"  [ngClass]="{'flowers-invalid': fieldFormHasErrors('device')}" >
+          <div class="col s12">
+            <div class="with-info">
+              <mz-select-container #deviceSelect>
+                <select mz-select
+                        [disabled]="formContext.getControlConfig('device').disabled"
+                        id="device"
+                        formControlName="device"
+                        label="{{ 'order.device' | translate }}{{getRequired(formContext.getControlConfig('device'))}}"
+                        [(ngModel)]="entity.device"
+                        (change)="deviceChanged($event.target.value, 'order.device-label.')">
+                  <option [ngValue]="null" [id]="id + '-0'"></option>
+                  <option  [attr.data-icon]=" imgLocation + device.toString().toLowerCase() + '-image.png'"
+                           *ngFor="let device of deviceList; let i = index"
+                           [id]="id + '-' + (i + 1)"
+                           class="left circle valign-wrapper"
+                           [value]="device"><b>{{ 'order.device-type-group.' + device | translate }}</b>
+                                            <br>{{ 'order.device-type.' + device | translate }}</option>
+                </select>
+                <div *ngIf="fieldFormHasErrors('device')"
+                     class="error-container">
+                  <app-error *ngIf="form.get('device').errors.required"
+                             [errorMsg]="'order.errors.device-required' | translate"></app-error>
+                </div>
+              </mz-select-container>
+            </div>
+            <app-info [tooltipText]="'order.info.device' | translate"></app-info>
+          </div>
+
+        </div>
+
+        <div *ngIf="'TOKEN' == entity.device">
+          <app-input label="order.tokenSerialNumber" errorLabel="order.errors.token" [formContext]="formContext"
+                     tooltip="order.info.tokenSerialNumber" [path]="['tokenSerialNumber']" [param]="{max: 13}"></app-input>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title" id="holder-info-title">{{ 'order.holder.title' | translate }}</span>
+
+        <app-input label="order.holder.firstName" errorLabel="order.holder.errors.first-name" [formContext]="formContext" tooltip="order.holder.info.first-name"
+                   [path]="['holder', 'firstName']" [param]="{max: 60}"></app-input>
+
+        <app-input label="order.holder.surname" errorLabel="order.holder.errors.surname" [formContext]="formContext" tooltip="order.holder.info.surname"
+                   [path]="['holder', 'surName']" [param]="{max: 60}"></app-input>
+
+        <app-select translateViewPrefix="nationality." label="order.holder.nationality" errorLabel="order.holder.errors.nationality" [formContext]="formContext" tooltip="order.holder.info.nationality"
+                    [path]="['holder', 'nationality']" [values]="nationalities"></app-select>
+
+        <app-input label="order.holder.eMail" errorLabel="order.holder.errors.eMail" [formContext]="formContext" tooltip="order.holder.info.eMail"
+                   [path]="['holder', 'eMail']" [param]="{max: 100}"></app-input>
+
+        <app-input label="order.holder.eMailSecond" errorLabel="order.holder.errors.eMail" [formContext]="formContext" tooltip="order.holder.info.eMailSecond"
+                   [path]="['holder', 'eMailSecond']" [param]="{max: 100}"></app-input>
+
+        <app-select label="order.holder.certificateType"
+                    errorLabel="order.holder.errors.certificateType"
+                    translateViewPrefix="user.certificateTypes."
+                    [objectContent]="false"
+                    [values]="certificateTypeList"
+                    [formContext]="formContext"
+                    [path]="['holder', 'certificateType']"></app-select>
+
+        <app-select label="order.holder.roleType"
+                    errorLabel="order.holder.errors.roleType"
+                    translateViewPrefix="user.roles."
+                    [objectContent]="false"
+                    [values]="roleTypeList"
+                    [formContext]="formContext"
+                    tooltip="order.holder.info.roleType"
+                    [path]="['holder', 'roleType']"></app-select>
+
+        <app-date-input label="order.holder.birthDate"
+                        errorLabel="order.holder.errors.birthDate"
+                        [tooltip]="'order.holder.info.birthDate'"
+                        [formContext]="formContext"
+                        [path]="['holder', 'birthDate']"></app-date-input>
+
+        <app-input label="order.holder.phoneNumber" errorLabel="order.holder.errors.phoneNumber" [formContext]="formContext" tooltip="order.holder.info.phoneNumber"
+                   [path]="['holder', 'phoneNumber']" [param]="{max:20, min:5, mask: phoneMask}"></app-input>
+
+        <app-checkbox label="order.publish" [formContext]="formContext" [path]="['publish']"></app-checkbox>
+
+        <app-input label="order.holder.notifyEmail" errorLabel="order.holder.errors.notifyEmail" [formContext]="formContext" tooltip="order.holder.info.notifyEmail"
+                   [path]="['holder', 'notifyEmail']" [param]="{max: 100}"></app-input>
+
+        <app-select label="order.holder.certificateLevel"
+                    errorLabel="order.holder.errors.certificateLevel"
+                    [objectContent]="false"
+                    [values]="certificateLevelList"
+                    [formContext]="formContext"
+                    [path]="['holder', 'certificateLevel']"></app-select>
+
+        <app-unit-select [formContext]="formContext"></app-unit-select>
+
+        <app-input label="order.department" errorLabel="order.errors.department" [formContext]="formContext" tooltip="order.info.department"
+                   [path]="['department']"></app-input>
+
+        <app-input label="order.holder.activationCode" errorLabel="order.holder.errors.activation-code" [formContext]="formContext" tooltip="order.holder.info.activationCode"
+                   [path]="['holder', 'activationCode']" [param]="{min:5, max: 5, visible: false}"></app-input>
+
+      </div>
+    </div>
+
+
+    <!--<div class="card" *ngIf="entity.address != null && 'MOBILE' != entity.device" >-->
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title" id="address-info-title">{{ 'order.address.title' | translate }}</span>
+
+        <app-input label="order.address.name" [formContext]="formContext" tooltip="order.address.info.name"
+                   [path]="['address', 'name']" [param]="{max: 100}"></app-input>
+
+        <app-input label="order.address.company" [formContext]="formContext" tooltip="order.address.info.company"
+                   [path]="['address', 'company']" [param]="{max: 35}"></app-input>
+
+        <app-input label="order.address.streetAndHouseNo" errorLabel="order.address.errors.streetAndHouseNo" [formContext]="formContext" tooltip="order.address.info.streetAndHouseNo"
+                   [path]="['address', 'streetAndHouseNo']" [param]="{max: 35}"></app-input>
+
+        <app-input label="order.address.addressLine2" [formContext]="formContext" tooltip="order.address.info.addressLine2"
+                   [path]="['address', 'addressLine2']" [param]="{max: 35}"></app-input>
+
+        <app-input label="order.address.postCode" errorLabel="order.address.errors.postCode" [formContext]="formContext" tooltip="order.address.info.postCode"
+                   [path]="['address', 'postCode']" [param]="{max: 15}"></app-input>
+
+        <app-input label="order.address.city" errorLabel="order.address.errors.city" [formContext]="formContext" tooltip="order.address.info.city"
+                   [path]="['address', 'city']" [param]="{max: 25}"></app-input>
+
+        <app-select translateViewPrefix="country." label="order.address.country" errorLabel="order.address.errors.country" [formContext]="formContext" tooltip="order.address.info.country"
+                    [path]="['address', 'country']" [values]="countries"></app-select>
+
+      </div>
+    </div>
+
+    <div class="card" *ngIf="isAdminValidationPage() || isDiaValidationPage() || isUserValidationPage()">
+
+      <div class="card-content">
+        <span class="card-title"> {{'order.identity-documents' | translate}} </span>
+
+        <app-checkbox label="order.remoteId" [formContext]="formContext" [path]="['remoteId']"></app-checkbox>
+
+        <div class="row valign-wrapper relative" *ngIf="orderFormConfig.holder.documentsSelect.visible">
+          <div class="col s12">
+            <div class="with-info-checkbox  ">
+              <div >
+                <div class="file-field  btn btn-blue file-wrapper">
+                  <span>{{ 'order.ui.select-files-button' | translate }} {{getRequired(orderFormConfig.holder.documents)}}</span>
+                  <input #holderDocuments
+                         id="documents-input"
+                         name="file"
+                         type="file"
+                         accept="image/jpeg,image/png,application/pdf"
+                         (change)="addFilesToQueue($event)" multiple>
+                </div>
+                <div class="info-for-files-wrapper">
+                  <app-info [tooltipText]="'order.holder.info.documents' | translate"
+                            [position]="'right'"
+                            class="info-for-files"></app-info>
+                </div>
+
+              </div>
+              <div class="error-container documents-error"
+                   *ngIf="fieldFormHasErrors(['holder-documents'])">
+                <app-error *ngIf="form.get(['holder-documents']).errors.required"
+                           [errorMsg]="'order.errors.documents-required' | translate "
+                ></app-error>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row" *ngIf="orderFormConfig.holder.documents.visible">
+          <div class="col s6" *ngIf="entity.holder.documents?.length > 0">
+            <table class="document-upload-table" id="document-upload-table">
+              <thead>
+              <tr>
+                <th width="50%" id="document-header-name">{{'order.ui.documents-table.name' | translate}}</th>
+                <th width="15%" *ngIf="isUserValidationPage()" id="document-header-size">{{'order.ui.documents-table.size' | translate}}
+                </th>
+                <th width="35%" class="center-align"  id="document-header-actions">{{'order.ui.documents-table.actions' | translate}}</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of entity.holder.documents; let i = index">
+                <td [id]="'document-name-' + (i+1)">{{ item?.name }}</td>
+                <td *ngIf="isUserValidationPage()" [id]="'document-size-' + (i+1)">{{ getRoundedValue(item?.size / 1024) }}</td>
+                <td nowrap class="center-align">
+                    <span *ngIf="isUserValidationPage()"
+                          class="remove-action"
+                          [id]="'document-remove-' + (i+1)"
+                          (click)="removeDocument(i, item)"><i class="material-icons">delete</i>{{'order.ui.documents-table.remove' | translate}}
+                    </span>
+                  <span *ngIf="isDownloadShown(item.isUploadedByUser)"
+                        class="download-action"
+                        [id]="'document-download-' + (i+1)"
+                        (click)="downloadDocument(item)"><i class="material-icons">file_download</i>{{'order.ui.documents-table.download' | translate}}
+                    </span>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row valign-wrapper buttons-align">
+      <div class="col s10 valign-wrapper relative" *ngIf="formContext.getControlConfig('acceptedGTC').visible">
+        <div class="with-info">
+          <mz-checkbox-container class="tc">
+            <input mz-checkbox
+                   id="terms-and-conditions-checkbox"
+                   type="checkbox"
+                   [filledIn]="true"
+                   formGroupName="acceptedGTC"
+                   [checked]="entity.acceptedGTC===true"
+                   (change)="entity.acceptedGTC = !entity.acceptedGTC"/>
+            <label class="tc-label"> <span>{{ 'order.user.agreement.first-part' | translate }}</span>
+              <a (click)="showGlobalTermsAndConditions()" class="clickable"> {{ 'order.user.agreement.terms-link' | translate }}</a>
+              <span> {{ 'order.user.agreement.second-part' | translate }}</span> {{getRequired(orderFormConfig.acceptedGTC)}}
+            </label>
+          </mz-checkbox-container>
+        </div>
+      </div>
+      <div class="col s2 ">
+        <button mz-button
+                class="btn-green right"
+                *ngIf="actionButtons.userValidate.visible"
+                id="submit-bnt"
+                [disabled]="!actionButtons.userValidate.enabled || (isAgreementMandatory() && !entity.acceptedGTC)"
+                (click)="userValidates()">{{ 'order.ui.submit-btn' | translate }}
+        </button>
+      </div>
+    </div>
+
+
+    <div class="row valign-wrapper buttons-align">
+
+      <div class="col s2">
+
+        <app-back-to-list *ngIf="actionButtons.backToList.visible"
+                          (click)="changePage('/certificate-orders')"
+                          [label]="'app.back-to-list' | translate"></app-back-to-list>
+
+      </div>
+
+      <div class="col s8 offset-s2 right-align">
+
+        <button mz-button class="btn-blue"
+                *ngIf="actionButtons.saveAsDraft.visible"
+                id="save-as-draft-btn"
+                (click)="saveAsDraft()" [disabled]="!actionButtons.saveAsDraft.enabled">{{'order.ui.draft-button' |
+          translate}}
+        </button>
+
+        <button mz-button class="btn-green"
+                (click)="createOrder()"
+                *ngIf="actionButtons.saveAsUserDraft.visible"
+                id="create-btn"
+                [disabled]="!actionButtons.saveAsUserDraft.enabled">{{'order.ui.create-button' |
+          translate}}
+        </button>
+
+        <button mz-button
+                class="btn-red" *ngIf="actionButtons.reject.visible"
+                id="reject-btn"
+                [disabled]="!actionButtons.reject.enabled" (click)="reject()">{{'order.ui.reject-button' |
+          translate}}
+        </button>
+        <button mz-button
+                class="btn-green" *ngIf="actionButtons.signAndSend.visible"
+                id="sign-and-send"
+                [disabled]="!actionButtons.signAndSend.enabled" (click)="signAndSend()">
+          {{'order.ui.sign-and-send-button' | translate}}
+        </button>
+
+
+      </div>
+
+    </div>
+
+    <div class="row center-align"
+         [ngClass]="{'flowers-text-green':formActionStatus.toString() == 'SUCCESS','flowers-text-error':formActionStatus.toString() == 'FAILED'}"
+         *ngIf="formActionStatus.toString() != 'NONE'">
+      <div>
+        <h5 id="form-result-message">{{ formActionResultMessage | translate }}</h5>
+      </div>
+
+    </div>
+
+  </form>
+
+</div>
+<ng4-loading-spinner [template]="loaderTemplate"></ng4-loading-spinner>

@@ -1,0 +1,98 @@
+input[type='file'] {
+  color: transparent;
+}
+
+.relative {
+  position: relative!important;
+}
+.clear-data {
+  position: absolute;
+  top: 2.2rem;
+  right: 3rem;
+}
+
+.document-upload-table {
+  font-size: 14px!important;
+}
+
+.document-upload-table thead {
+  border-bottom: 2px solid  #a5acb0!important;
+}
+
+.document-upload-table td, th {
+  padding: 5px 5px!important;
+}
+
+.remove-action {
+  color: #d60080;
+}
+
+.download-action {
+  color: #00aae7;
+
+}
+
+.download-action,
+.remove-action {
+  margin: 1px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-rignt: 5px;
+  font-size: 16px;
+}
+.document-upload-table .material-icons {
+  position: relative;
+  top: 0.3rem;
+}
+
+.documents-error {
+  margin: 0!important;
+}
+
+.flowers-date-invalid {
+  border-bottom: 2px solid #d60080;
+}
+
+.with-info-checkbox {
+  display: inline-block;
+}
+
+.info-for-checkbox {
+  top: -1.5rem!important;
+  position: absolute;
+  margin-left: 20px;
+  display: inline-block;
+}
+
+.info-for-files {
+  top: -0.5rem!important;
+  margin-left: 20px;
+  position: absolute;
+}
+
+.tc-label {
+  top: -2.6rem;
+  position: relative;
+  display: inline-block;
+  margin-left: 35px;
+  font-size: 15px;
+}
+
+.tc {
+  position: relative;
+  left: 2rem;
+}
+
+.file-wrapper {
+  display: inline-block;
+}
+
+.info-for-files-wrapper {
+  position: relative;
+  height: 2rem;
+  display: inline-block;
+}
+
+.buttons-align {
+  padding-right: 13px;
+}

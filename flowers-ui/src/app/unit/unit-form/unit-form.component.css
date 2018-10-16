@@ -1,0 +1,9 @@
+.back-to-list {
+  position:relative;
+  z-index: 997;
+}
+.back-to-list  .material-icons {
+  position:relative;
+  top:7px;
+}
+

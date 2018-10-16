@@ -1,0 +1,70 @@
+<div class="container">
+
+  <div class="row valign-wrapper">
+    <div class="col s12">
+      <div class="details-header"><h5 id="eseal-title">{{ 'eseal-activation.title' | translate }}</h5></div>
+      <app-back-to-list class="left back-to-list" (click)="changePage('/eseal-orders')" [label]="'app.back-to-list' | translate"></app-back-to-list>
+    </div>
+  </div>
+
+  <div class="row col s12 center-align">
+    <span>{{ 'eseal-activation.header-info-part1' | translate }}</span><br>
+    <span>{{ 'eseal-activation.header-info-part2' | translate }}</span>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-content">
+          <app-input [path]="['sealId']" label="eseal-activation.eseal-id"  [formContext]="formContext" errorLabel="eseal-activation.errors.sealId"></app-input>
+          <app-input [path]="['initialPassword']" label="eseal-activation.initial-pass"  [formContext]="formContext" errorLabel="eseal-activation.errors.initialPassword"></app-input>
+          <app-input [path]="['newPassword']" [type]="'password'" label="eseal-activation.new-pass" [formContext]="formContext" errorLabel="eseal-activation.errors.newPassword"></app-input>
+
+          <div class="row valign-wrapper" >
+            <div class="col s12"  >
+              <div >
+                <mz-input-container id="confirmed-password">
+                  <input mz-input
+                         id="confirmed-password-input"
+                         label="{{'eseal-activation.confirmed-pass' | translate}}"
+                         type="password"
+                         [(ngModel)]="confirmedPassword"
+                         [ngModelOptions]="{standalone: true}"/>
+
+                  <div class="error-container" *ngIf="!confirmedIsValid">
+                    <app-error id="confirmed-password-invalid" *ngIf="!confirmedIsValid" [errorMsg]="'eseal-activation.errors.confirmed-invalid' | translate"></app-error>
+                  </div>
+                </mz-input-container>
+              </div>
+            </div>
+          </div>
+
+        <div class="row center-align">
+          <img [src]="imgLocation"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row valign-wrapper buttons-align">
+    <div class="col s2">
+      <app-back-to-list class="left back-to-list" (click)="changePage('/eseal-orders')" [label]="'app.back-to-list' | translate"></app-back-to-list>
+    </div>
+    <div class="col s8 offset-s2 right-align">
+      <button mz-button class="btn-green" (click)="activate()" >{{'app.btn.activate'|translate}}</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12">
+      <div class="flowers-invalid center" *ngIf="formGlobalMsg.type == 'FAILED'">
+        <div *ngFor="let code of formGlobalMsg.codes; let i = index"><h5 [id]="'error-message-' + (i + 1)">{{'eseal-activation.errors.global-' + code | translate:entity}}</h5></div>
+      </div>
+      <div class="flowers-success center" *ngIf="formGlobalMsg.type == 'SUCCESS'">
+        <div *ngFor="let code of formGlobalMsg.codes; let i = index"><h5 [id]="'success-message-' + (i + 1)">{{'eseal-activation.messages.' + code | translate:entity}}</h5></div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<ng4-loading-spinner [template]="loaderTemplate"></ng4-loading-spinner>

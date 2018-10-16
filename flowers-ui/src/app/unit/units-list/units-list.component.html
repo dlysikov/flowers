@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-content">
+    <table class="highlight bordered"
+    id="units-table">
+      <thead>
+      <tr>
+        <th width="5%" id="unit-list-header-id">{{'manage-units.list.id' | translate}}</th>
+        <th width="35%" id="unit-list-header-requestor">{{ 'manage-units.list.requestor' | translate }}</th>
+        <th width="60%" id="unit-list-header-unit">{{ 'manage-units.list.unit' | translate }}</th>
+        <th width="10%" class="right-align"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngIf="unitsEmpty()">
+        <td colspan="6">{{ 'manage-units.list.no-units-found' | translate }}</td>
+      </tr>
+      <tr *ngFor="let unit of units; let i = index"
+      [id]="'unit-list-row-' + (i+1)">
+        <td [id]="'unit-list-id-' + (i+1)">{{unit.id}}</td>
+        <td [id]="'unit-list-requestor-' + (i+1)">{{unit.requestor.name}}</td>
+        <td [id]="'unit-list-unit-' + (i+1)">{{unit.commonName}}</td>
+        <td class="right-align">
+          <i [id]="'unit-edit-' + (i+1)" class="material-icons  actions" [routerLink]="['details',unit.id]">edit</i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

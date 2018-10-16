@@ -1,0 +1,20 @@
+/* This is needed for some mobile phones to display the Google Icon font properly */
+.material-icons {
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'liga';
+}
+
+.flowers-info-container {
+  top: 1.5rem;
+  position: relative;
+}
+
+.flowers-info {
+  color: #d1d4d3!important;
+  cursor: pointer;
+}
+
+.flowers-info:hover {
+  color: $flowers-blue!important;
+  transition: color .3s!important;
+}

@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row valign-wrapper">
+    <div class="col s12">
+      <div class="details-header"><h5 id="eseal-title">{{ 'eseal.title' | translate }}</h5></div>
+      <app-back-to-list class="left back-to-list" (click)="changePage('/eseal-orders')" [label]="'app.back-to-list' | translate"></app-back-to-list>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-content">
+
+        <form [formGroup]="form" novalidate>
+
+          <app-input [path]="['id']" label="order.id" [param]="{disabled:true}" [formContext]="formContext"></app-input>
+          <app-input [path]="['lrsOrderNumber']" label="eseal.lrs" [param]="{disabled:true}" [formContext]="formContext"></app-input>
+          <app-input [path]="['ssn']" label="eseal.ssn" [param]="{disabled:true}" [formContext]="formContext"></app-input>
+
+          <app-unit-select [selectUnitAction]="selectUnitAction()" [param]="{required: true}" [formContext]="formContext"></app-unit-select>
+
+          <div *ngIf="entity.unit">
+            <app-select [path]="['eSealManagers']" label="eseal.managers" errorLabel="eseal.errors.managers" [multiple]="true" [formContext]="formContext"
+                        [values]="managers" [param]="{required: true}" [condition]="eSealManagersCondition()" [valueChangeAction]="managersChangedAction()"></app-select>
+          </div>
+
+          <app-input [path]="['organisationalUnit']" label="eseal.organisational-unit" [formContext]="formContext" [param]="{max: 10}"></app-input>
+
+          <app-input [path]="['eSealAdministratorEmail']" label="eseal.eseal-administrator-email" errorLabel="eseal.errors.eseal-administrator-email"
+                     [formContext]="formContext" [param]="{required: true, max: 100}" [valueChangeAction]="adminEmailChangedAction()"></app-input>
+
+          <app-checkbox [path]="['publish']" label="eseal.publish" [formContext]="formContext"></app-checkbox>
+
+          <app-checkbox [path]="['acceptedGTC']" label="eseal.acceptedGTC" [formContext]="formContext" [param]="{required: true}"
+                        (change)="formButtons.sendToLrs.enabled = $event"></app-checkbox>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="row valign-wrapper buttons-align">
+    <div class="col s2">
+      <app-back-to-list class="left back-to-list" (click)="changePage('/eseal-orders')" [label]="'app.back-to-list' | translate"></app-back-to-list>
+    </div>
+    <div class="col s8 offset-s2 right-align">
+      <button *ngIf="formButtons.saveAsDraft.visible"  mz-button class="btn-blue" (click)="saveESealAsDraft()">{{'order.ui.draft-button'|translate}}</button>
+      <button *ngIf="formButtons.save.visible"  mz-button class="btn-blue" (click)="saveESeal()">{{'app.btn.save'|translate}}</button>
+      <button *ngIf="formButtons.sendToLrs.visible" [disabled]="!formButtons.sendToLrs.enabled"  mz-button class="btn-green" (click)="sendToLRS()">{{'app.btn.send-to-lrs'|translate}}</button>
+      <button *ngIf="formButtons.activate.visible" [disabled]="!formButtons.activate.enabled"  mz-button class="btn-green" [routerLink]="['activation']">{{'app.btn.activate'|translate}}</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12">
+      <div class="flowers-invalid center" *ngIf="formGlobalMsg.type == 'FAILED'">
+        <div *ngFor="let code of formGlobalMsg.codes; let i = index"><h5 [id]="'error-message-' + (i + 1)">{{'eseal.errors.global-' + code | translate:entity}}</h5></div>
+      </div>
+      <div class="flowers-success center" *ngIf="formGlobalMsg.type == 'SUCCESS'">
+        <div *ngFor="let code of formGlobalMsg.codes; let i = index"><h5 [id]="'success-message-' + (i + 1)">{{'eseal.messages.' + code | translate:entity}}</h5></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ng4-loading-spinner [template]="loaderTemplate"></ng4-loading-spinner>

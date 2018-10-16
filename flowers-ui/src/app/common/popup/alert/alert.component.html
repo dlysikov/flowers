@@ -1,0 +1,18 @@
+<mz-modal [options]="modalOptions">
+  <mz-modal-content>
+    <div class="alert-icon">
+      <img [src]="imgLocation"/>
+    </div>
+    <div class="alert-message" [innerHTML]="message | translate:param"></div>
+    <div class="alert-body" [innerHTML]="param?.body"></div>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <div class="center-align">
+      <button mz-button
+              mz-modal-close
+              class="waves-effect waves-light  btn-blue">OK
+      </button>
+    </div>
+  </mz-modal-footer>
+</mz-modal>
+

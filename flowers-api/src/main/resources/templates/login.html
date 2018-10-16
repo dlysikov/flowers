@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form name="ORELYFORM" action="#" th:action="${destination}" method="post">
+    <input name="SAMLRequest" type="hidden" th:value="${samlRequest}" />
+    <div style="display:none"><input type="submit" value="Submit" /></div>
+</form>
+</body>
+</html>
+<script type="text/javascript">
+    document.ORELYFORM.submit();
+</script>

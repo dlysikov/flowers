@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-content">
+    <table class="highlight bordered">
+      <thead>
+      <tr>
+        <th width="5%">{{ 'manage-orders.list.id' | translate}}</th>
+        <th width="16%">{{ 'manage-orders.list.first-name' | translate }}</th>
+        <th width="16%">{{ 'manage-orders.list.last-name' | translate }}</th>
+        <th width="16%">{{ 'manage-orders.list.eMail' | translate }}</th>
+        <th width="25%">{{ 'manage-orders.list.status' | translate }}</th>
+        <th width="20">{{ 'manage-orders.list.lastStatusUpdate' | translate }}</th>
+        <th width="12%" class="right-align">{{ 'manage-orders.list.actions' | translate }}</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngIf="ordersEmpty()">
+        <td colspan="6">{{ 'manage-orders.list.no-users-found' | translate }}</td>
+      </tr>
+      <tr *ngFor="let order of orders; let i = index">
+        <td>{{order.id}}</td>
+        <td>{{order.holder.firstName}}</td>
+        <td>{{order.holder.surName}}</td>
+        <td>{{order.holder.notifyEmail}}</td>
+        <td class="valign-wrapper">
+          <i class="material-icons tiny left" [ngStyle]="{color: statusColor[order.status]}" [routerLink]="['details',order.id]">label</i> {{'order.statuses.' + order.status | translate}}
+        </td>
+        <td>{{order.lastStatusDate | date:'dd/MM/yyyy hh:mm'}}</td>
+        <td class="right-align">
+          <i class="material-icons  actions" [routerLink]="['details',order.id]">edit</i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

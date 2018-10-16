@@ -1,0 +1,124 @@
+body {
+  background-color: #fafafa;
+  font-size:16px;
+}
+
+.brand-logo img {
+  height: 50px;
+  margin-top:25px;
+  margin-left:25px;
+}
+
+.user-profile-block .user-name {
+  font-weight: bold;
+  font-size: 18px;
+  color: #000000;
+}
+.user-profile-block .logout {
+  color:#d60080;
+  font-size: 18px;
+  cursor:pointer;
+}
+.user-profile-block .user-profile-logo {
+  padding-right:18px;
+  padding-left:18px;
+  height:60px;
+}
+
+.nav-wrapper .lang-select {
+  margin-left:250px;
+}
+
+.row .col {
+  padding:0;
+}
+
+.header-wrapper {
+  padding: 25px 11px 0 11px!important;
+}
+
+.header-group {
+  font-size:20px;
+  color:#000000;
+}
+
+.btn-lang {
+  background-color:#fff;
+  color:inherit !important;
+  box-shadow:none;
+}
+.btn-lang:hover {
+  background-color:#fff;
+}
+.flowers-invalid,
+.flowers-invalid label{
+  color: #d60080!important;
+}
+
+.flowers-invalid  input, .flowers-invalid select {
+  border-bottom: 2px solid #d60080!important;
+}
+
+.flowers-success {
+  color: #8dc63f!important;
+}
+dp-date-picker {
+  display:block !important;
+  height:0px !important;
+  top:-40px;
+}
+
+.dp-picker-input {
+  width:0px !important;
+  height:0px !important;
+  position:relative;
+  z-index:-20;
+  top:-20px;
+}
+
+.loader {
+  position: absolute;
+  top:48%;
+  left:48%;
+  border: 5px solid #03a9f4;
+  border-radius: 50%;
+  border-top: 5px solid transparent;
+  width: 65px;
+  height: 65px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 700ms linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+
+.active-filter-wrapper {
+  font-size: 0.75em!important;
+  font-weight: bold;
+}
+
+.actions {
+  color: #00aae7;
+  cursor: pointer;
+}
+.details-header {
+  text-align: center;
+  position:relative;
+  top:40px;
+}
+.dropdown-trigger {
+  font-weight: normal !important;
+}

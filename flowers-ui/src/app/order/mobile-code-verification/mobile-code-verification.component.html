@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col s4"></div>
+  <div class="col s4">
+    <br/>
+    <br/>
+    <div style="text-align: center;">
+      <div [innerHTML]="'mobileCodeVerification.info.mobileCode' | translate"></div>
+    </div>
+    <div class="card">
+      <div class="card-content">
+        <form [formGroup]="form" novalidate>
+          <div class="row valign-wrapper" >
+            <div class="col s12">
+              <div [ngClass]="{'flowers-invalid': fieldFormHasErrors('mobileCode')}">
+                <mz-input-container>
+                  <input mz-input
+                         id="mobile-code"
+                         [label]="'mobileCodeVerification.mobileCode' | translate"
+                         type="text"
+                         data-length="{{formConfig.mobileCode.max}}"
+                         [maxlength]="formConfig.mobileCode.max"
+                         [placeholder]="'&nbsp;'"
+                         formControlName="mobileCode"
+                         [(ngModel)]="entity.mobileCode">
+
+                  <div class="error-container" *ngIf="fieldFormHasErrors('mobileCode')">
+                    <app-error [errorMsg]="'mobileCodeVerification.errors.mobileCode-invalid' | translate"></app-error>
+                  </div>
+                </mz-input-container>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col s4"></div>
+          <div class="col s4">
+              <button style="width:100%" mz-button class="btn-green" (click)="submit()">{{'app.btn.submit'|translate}}</button>
+          </div>
+          <div class="col s4"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col s4"></div>
+</div>

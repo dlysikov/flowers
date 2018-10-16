@@ -1,0 +1,20 @@
+<div class="row valign-wrapper" style="margin-left:0px">
+  <div class="col s12 valign-wrapper">
+    <mz-dropdown [id]="'page-size-dropdown'" [dropdownButtonId]="'btn-page-size-dropdown'">
+      <mz-dropdown-item *ngFor="let pageSize of pageSizes">
+        <a (click)="changePageSize(pageSize)">{{pageSize}}</a>
+      </mz-dropdown-item>
+    </mz-dropdown>
+    <ul class="hide-on-med-and-down">
+      <li><a mz-button class="dropdown-trigger btn-page-size" id="btn-page-size-dropdown">{{pageSize}}</a></li>
+    </ul>
+    <mz-pagination #pagination
+      [currentPage]="currentPage"
+      [itemsPerPage]="pageSize"
+      [totalItems]="totalItems != null && totalItems > 0 ? totalItems : 1"
+      (pageChange)="changePage($event)"
+      [maxPageButtons]="20"
+      [enableFirstAndLastPageButtons]="false">
+    </mz-pagination>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="row valign-wrapper relative" [ngClass]="{'flowers-invalid': errorLabel != null && fieldFormHasErrors()}" *ngIf="control.visible">
+  <div class="col s12">
+    <div [ngClass]="{'with-info' : tooltip != null}" >
+      <mz-checkbox-container id="{{id}}">
+        <input mz-checkbox
+               id="{{id + '-checkbox'}}"
+               type="checkbox"
+               label="{{label | translate}}{{getRequired()}}"
+               [formControl]="formControl"
+               [disabled]="control.disabled"
+               [filledIn]="true"
+               [checked]="value"
+               (change)="submitEvent($event)">
+            </mz-checkbox-container>
+    </div>
+    <app-info id="{{id + '-tooltip'}}" [tooltipText]="tooltip | translate" *ngIf="tooltip"></app-info>
+  </div>
+</div>

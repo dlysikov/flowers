@@ -1,0 +1,10 @@
+<mz-modal [options]="modalOptions">
+  <mz-modal-content>
+    <h5 style="text-align: center" [innerHTML]="textCode | translate"></h5>
+  </mz-modal-content>
+  <mz-modal-footer>
+    <button mz-button mz-modal-close class="left btn-red" (click)="noCallback()">{{'app.btn.no' | translate}}</button>
+    <button mz-button mz-modal-close class="btn-green" (click)="okCallback()">{{'app.btn.yes' | translate}}</button>
+  </mz-modal-footer>
+</mz-modal>
+
